@@ -8,7 +8,7 @@ L'objectif de ce projet est d'appliquer des concepts de Data Science et de Machi
 
 ## ✨ Fonctionnalités
 * **Recherche par Humeur :** Choix entre 4 ambiances prédéfinies (Sport, Concentration, Triste/Calme, Fête) qui génèrent un profil mathématique idéal.
-* **Filtre par Genres :** Limite les recommandations aux genres sélectionnés (Rap, Jazz, House, Pop).
+* **Filtre par Genres :** Limite les recommandations aux genres sélectionnés (Jazz, House, Pop).
 * **Mode "Custom DJ" :** Personnalisation totale du profil de recherche grâce à 7 curseurs interactifs (Énergie, Valence, Volume, Acoustique, etc.).
 * **Lecteur Spotify Intégré :** Écoute des extraits de 30 secondes directement depuis l'application.
 * **Explicabilité de l'IA (Radar Chart) :** Visualisation graphique avec Plotly comparant l'humeur demandée avec les caractéristiques réelles de la chanson recommandée.
