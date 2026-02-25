@@ -1,6 +1,6 @@
 # 🎧 Moodify : Le Recommandateur de Musique par IA
 
-🌐 **[Testez l'application en direct ici !]([TON_LIEN_STREAMLIT_ICI])**
+🌐 **[Testez l'application en direct ici !](https://moodify-app-ntw8uwxaob3tdu6cvxz8ex.streamlit.app/)**
 
 ## 📖 À propos du projet
 **Moodify** est une application web interactive développée dans le cadre d'un projet personnel en **MAM3 à Polytech Nice Sophia**. 
