@@ -34,22 +34,4 @@ Pour faire tourner ce projet sur votre machine :
    ```bash
    git clone [https://github.com/FirasGhedir3/Moodify-App.git](https://github.com/FirasGhedir3/Moodify-App.git)
    cd Moodify-App
-Préparez les données :
-Téléchargez le fichier dataset.csv depuis Kaggle et placez-le à la racine du dossier.
 
-Installez les bibliothèques :
-
-Bash
-pip install -r requirements.txt
-Lancez l'application :
-
-Bash
-streamlit run app.py
-👤 Contact
-Firas Ghedir
-
-🎓 Élève Ingénieur en Mathématiques Appliquées (MAM3) - Polytech Nice Sophia
-
-📧 Email : firasghedir3@gmail.com
-
-🔗 LinkedIn : Mon Profil
