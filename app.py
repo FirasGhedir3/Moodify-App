@@ -21,36 +21,38 @@ st.title("🎧 Moodify : La musique selon ton humeur")
 st.markdown("Dis-moi ce que tu ressens et ce que tu aimes, je m'occupe du reste !")
 
 # ---------------------------------------------------------
-# 2. Chargement des données (C'EST ICI QUE J'AI MIS TON CODE)
+# 2. Chargement des données 
 # ---------------------------------------------------------
 @st.cache_data
 def load_data():
-    # On charge le dataset téléchargé depuis Kaggle
-    df = pd.read_csv("dataset.csv") # Renomme bien le fichier téléchargé en "dataset.csv"
-    
-    # 1. On renomme la colonne genre pour la rendre plus simple
+    # Chargement du dataset depuis le CSV.
+    # Remarque pédagogique : on utilise ici l'ensemble des données disponibles
+    # après filtrage par genre (on ne resample plus pour équilibrer), afin
+    # de conserver la richesse et la variabilité du dataset réel.
+    df = pd.read_csv("dataset.csv")
+
+    # Renommer la colonne 'track_genre' en 'genre' si nécessaire
     if 'track_genre' in df.columns:
         df = df.rename(columns={'track_genre': 'genre'})
-    
-    # 2. On filtre STRICTEMENT les 4 classes de ton cahier des charges
+
+    # Filtrer pour ne garder que les genres demandés par le projet
     genres_autorises = ['rap', 'jazz', 'house', 'pop']
     df = df[df['genre'].isin(genres_autorises)]
-    
-    # 3. Nettoyage des données manquantes et des doublons
+
+    # Nettoyage : retirer les lignes sans titre ou sans artiste
     df = df.dropna(subset=['track_name', 'artists'])
+
+    # Supprimer les doublons exacts (même titre + mêmes artistes)
     df = df.drop_duplicates(subset=['track_name', 'artists'])
-    
-    # 4. ÉQUILIBRAGE DU DATASET (La consigne du cahier des charges !)
-    n_samples = 500 
-    
-    # On groupe par genre, on prend 500 chansons au hasard pour chaque, et on rassemble le tout
-    # Attention: si un genre a moins de 500 chansons, ça plantera. On utilise replace=True au cas où.
-    df_balanced = df.groupby('genre').sample(n=n_samples, random_state=42, replace=True)
-    
-    # 5. On réinitialise l'index proprement
-    df_balanced = df_balanced.reset_index(drop=True)
-    
-    return df_balanced
+
+    # Nous utilisons l'ensemble filtré sans rééchantillonnage ici. Cela signifie
+    # que la fréquence des genres dans le dataset reflète la réalité des données
+    # d'origine (ce qui peut être souhaitable pour certaines recommandations).
+
+    # Réinitialiser l'index pour plus de propreté
+    df = df.reset_index(drop=True)
+
+    return df
 
 try:
     df = load_data()
@@ -84,7 +86,7 @@ with col1:
 with col2:
     st.subheader("2️⃣ Ton humeur actuelle")
     
-    # Tabs for mood selection
+    # Onglets pour la sélection de l'humeur (Quick Mood vs Custom DJ Mode)
     tab1, tab2 = st.tabs(["🎯 Quick Mood", "🎛️ Custom DJ Mode"])
     
     with tab1:
@@ -156,7 +158,8 @@ if st.button("Trouver ma musique !"):
         st.stop()
         
     df_filtered = df_filtered.reset_index(drop=True)
-    # Use loudness_normalized instead of loudness for features
+    # Pour le modèle on utilisera la loudness normalisée (0..1) afin que
+    # toutes les features aient des échelles comparables.
     features_for_model = ['acousticness', 'danceability', 'energy', 'instrumentalness', 'speechiness', 'valence', 'loudness_normalized']
     X = df_filtered[features_for_model]
 
@@ -165,7 +168,8 @@ if st.button("Trouver ma musique !"):
     X_scaled = scaler.fit_transform(X)
     ideal_scaled = scaler.transform(ideal_vector)
 
-    # Increase n_neighbors to 20 to find more candidates, then filter for duplicates
+    # Nous cherchons jusqu'à 20 voisins afin d'avoir un pool plus large de candidats
+    # puis nous filtrons les doublons pour n'afficher que 5 morceaux uniques.
     n_neighbors = min(20, len(df_filtered))
     model = NearestNeighbors(n_neighbors=n_neighbors, algorithm='ball_tree')
     model.fit(X_scaled)
@@ -187,7 +191,7 @@ if st.button("Trouver ma musique !"):
         song = df_filtered.iloc[idx]
         track_key = (song['track_name'], song['artists'])
         
-        # Skip if we've already displayed this track
+        # Si ce morceau a déjà été affiché (même titre + même artiste), on l'ignore
         if track_key in seen_tracks:
             continue
         
