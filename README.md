@@ -39,7 +39,7 @@ Si vous souhaitez faire tourner ce projet sur votre propre machine :
    ```bash
    streamlit run app.py
 ## 👤 Auteur
-**Firas Ghedir**
+**Firas Ghedir:**
 Élève Ingénieur en Mathématiques Appliquées et Modélisation (MAM3) à Polytech Nice Sophia.
 * **📧 Email :** firasghedir3@gmail.com
 * **🔗 LinkedIn :** https://www.linkedin.com/in/firas-ghedir-421510213
