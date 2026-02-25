@@ -1,6 +1,6 @@
 # 🎧 Moodify : Le Recommandateur de Musique par IA
 
-🌐 **[Testez l'application en direct ici !]([TON_LIEN_STREAMLIT_ICI])**
+🌐 **[Testez l'application en direct ici !](https://moodify-app-ntw8uwxaob3tdu6cvxz8ex.streamlit.app/)**
 
 ## 📖 À propos du projet
 **Moodify** est une application web interactive développée dans le cadre d'un projet personnel en **MAM3 à Polytech Nice Sophia**. 
@@ -32,3 +32,14 @@ Si vous souhaitez faire tourner ce projet sur votre propre machine :
 1. Clonez ce dépôt :
    ```bash
    git clone [https://github.com/FirasGhedir3/Moodify-App.git](https://github.com/FirasGhedir3/Moodify-App.git)
+2. Installez les dépendances requises :
+   ```bash
+   pip install -r requirements.txt
+3. Lancez l'application Streamlit :
+   ```bash
+   streamlit run app.py
+##👤 Auteur
+Firas Ghedir
+Élève Ingénieur en Mathématiques Appliquées et Modélisation (MAM3) à Polytech Nice Sophia.
+* **📧 Email :** firasghedir3@gmail.com
+* **🔗 LinkedIn :** https://www.linkedin.com/in/firas-ghedir-421510213
